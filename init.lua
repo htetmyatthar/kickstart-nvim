@@ -156,6 +156,10 @@ require('lazy').setup({
     'folke/tokyonight.nvim',
     --"rose-pine/neovim",
     --as = "rose-pine",
+    --"bluz71/vim-moonfly-colors",
+    -- as = "moonfly",
+    --"bluz71/vim-nightfly-colors",
+    --as = "nightfly",
     priority = 1000,
     config = function()
       vim.cmd.colorscheme 'tokyonight-night'
@@ -285,6 +289,11 @@ vim.o.completeopt = 'menuone,noselect'
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
+
+-- change windows between buffers
+vim.keymap.set("n", "<leader>nb", vim.cmd.bnext)
+vim.keymap.set("n", "<leader>pb", vim.cmd.bprevious)
+vim.keymap.set("n", "<leader>db", vim.cmd.bdelete)
 
 -- open netrw file-tree
 vim.keymap.set("n", "nt", vim.cmd.Ex)

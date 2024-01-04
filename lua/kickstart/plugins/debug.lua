@@ -26,6 +26,7 @@ return {
     local dapui = require 'dapui'
 
     require('mason-nvim-dap').setup {
+      automatic_installation = true,
       -- Makes a best effort to setup the various debuggers with
       -- reasonable debug configurations
       automatic_setup = true,
@@ -41,6 +42,13 @@ return {
         'delve',
       },
     }
+
+    -- config for c and cpp and rust.
+    --dap.adapters.cppdbg = {
+    --  id = 'cppdbg',
+    --  type = 'executable',
+    --  command = '~/.local/share/nvim/mason/packages/cpptools/extension/debugAdapters/bin/OpenDebugAD7',
+    --}
 
     -- Basic debugging keymaps, feel free to change to your liking!
     vim.keymap.set('n', '<F5>', dap.continue, { desc = 'Debug: Start/Continue' })

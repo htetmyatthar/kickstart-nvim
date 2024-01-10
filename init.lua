@@ -153,16 +153,16 @@ require('lazy').setup({
   {
     -- Theme inspired by Atom
     --'navarasu/onedark.nvim',
-    'folke/tokyonight.nvim',
-    --"rose-pine/neovim",
-    --as = "rose-pine",
+    --'folke/tokyonight.nvim',
+    "rose-pine/neovim",
+    as = "rose-pine",
     --"bluz71/vim-moonfly-colors",
     -- as = "moonfly",
     --"bluz71/vim-nightfly-colors",
     --as = "nightfly",
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme 'tokyonight-night'
+      vim.cmd.colorscheme 'rose-pine'
       vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
       vim.api.nvim_set_hl(0, "NormalFloat", {bg = "none" })
     end,
@@ -291,12 +291,16 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 
 -- change windows between buffers
-vim.keymap.set("n", "<leader>nb", vim.cmd.bnext)
-vim.keymap.set("n", "<leader>pb", vim.cmd.bprevious)
-vim.keymap.set("n", "<leader>db", vim.cmd.bdelete)
+vim.keymap.set("n", "<leader>nb", vim.cmd.bnext, {desc = "[N]ext opened [B]uffer" })
+vim.keymap.set("n", "<leader>pb", vim.cmd.bprevious, {desc = "[P]revious opened [B]uffer"})
+vim.keymap.set("n", "<leader>db", vim.cmd.bdelete, {desc = "[D]elete current [B]uffer"})
+
+-- split windows vertically and horizontally
+vim.keymap.set("n", "<leader>Wv", vim.cmd.vsplit, {desc = "split [W]indow [V]ertically"})
+vim.keymap.set("n", "<leader>Wh", vim.cmd.split, {desc = "split [W]indow [H]orizontally"})
 
 -- open netrw file-tree
-vim.keymap.set("n", "nt", vim.cmd.Ex)
+vim.keymap.set("n", "nt", vim.cmd.Ex, { desc = "Open netrw file tree"})
 
 -- [[ Basic Keymaps ]]
 

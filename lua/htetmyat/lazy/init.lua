@@ -14,12 +14,12 @@ return {
 	-- useful plugin to show you pending keybinds.
 	{ "folke/which-key.nvim", opts = {} },
 
-	{
-		-- add indentation guides even on blank lines
-		"lukas-reineke/indent-blankline.nvim",
-		main = "ibl",
-		opts = {},
-	},
+	-- {
+	-- 	-- add indentation guides even on blank lines
+	-- 	"lukas-reineke/indent-blankline.nvim",
+	-- 	main = "ibl",
+	-- 	opts = {},
+	-- },
 
 	{
 		-- Set lualine as statusline

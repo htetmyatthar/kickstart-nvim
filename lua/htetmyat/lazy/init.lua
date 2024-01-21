@@ -4,7 +4,8 @@ return {
 	"tpope/vim-rhubarb",
 
 	-- detect tabstop and shiftwidth automatically
-	"tpope/vim-sleuth",
+	--"tpope/vim-sleuth",
+	-- I set those as defaults in set.lua
 
 	"nvim-lua/plenary.nvim",
 

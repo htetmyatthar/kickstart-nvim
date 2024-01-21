@@ -13,7 +13,6 @@ return {
 		-- {
 		"rose-pine/neovim",
 		name = "rose-pine",
-		disable_background = true,
 		-- },
 
 		priority = 1000,

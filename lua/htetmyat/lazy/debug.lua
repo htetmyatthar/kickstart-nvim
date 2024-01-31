@@ -20,7 +20,7 @@ return {
 			handlers = {},
 
 			ensure_installed = {
-				"delve", "codelldb", "debugpy"
+				"delve", "codelldb", "debugpy", "java-debug-adapter", "java-test"
 			},
 		}
 
@@ -32,6 +32,7 @@ return {
 		vim.keymap.set("n", "<leader>B", function()
 			dap.set_breakpoint(vim.fn.input "Breakpoint condition: ")
 		end, {desc = "Debug: Set Breakpoint"})
+		vim.keymap.set("n", "<F9>", dap.terminate, {desc = "Debug: Terminate debug session."})
 
 		dapui.setup{
 		-- Set icons to characters that are more likely to work in every terminal.
@@ -63,11 +64,15 @@ return {
 
 		--install golang specific config
 		require("dap-go").setup()
+
 		-- install python specific config
 		require("dap-python").setup('~/.virtualenvs/debugpy/bin/python')
+
+		--require('jdtls.dap').setup_dap_main_class_configs()
+
 		-- install C specific config
-		if not dap.adapters["codelldb"] then
-			require("dap").adapters["codelldb"] = {
+		--if not dap.adapters["codelldb"] then
+		dap.adapters["codelldb"] = {
 				type = "server",
 				host = "localhost",
 				port = "${port}",
@@ -79,7 +84,6 @@ return {
 					},
 				},
 			}
-		end
 		for _, lang in ipairs({"c", "cpp"}) do
 			dap.configurations[lang] = {
 				{
@@ -95,10 +99,40 @@ return {
 					type = "codelldb",
 					request = "attach",
 					name = "Attach to process",
-					--processId = require("dap.utils.").pick_process,
+					processId = require("dap.utils").pick_process,
 					cwd = "${workspaceFolder}",
 				},
 			}
 		end
+
+		-- dap.adapters.java = function(callback)
+		-- 	callback({
+		-- 		type = 'server',
+		-- 		host = '127.0.0.1',
+		-- 		port = 5005,
+		-- 	})
+		-- end
+		--
+		-- -- install java specific config
+		-- dap.configurations.java = {
+		-- 	{
+  --               type = "java",
+		-- 		request = "attach",
+		-- 		name = "Debug (Attach) - Remote",
+		-- 		hostName = "127.0.0.1",
+		-- 		port = 5005,
+		-- 	},
+		-- 	{
+		-- 		name = "Launch YourClassName",
+		-- 		type = "java",
+		-- 		request = "launch",
+		-- 		classPaths = {},
+		-- 		javaExec = "/usr/bin/java",
+		-- 	}
+		-- }
+		--
 	end
 }
+	-- name = "Debug (Attach) - Remote",
+	-- hostName = "127.0.0.1",
+	-- port = 5005,

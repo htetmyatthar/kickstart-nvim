@@ -68,7 +68,9 @@ return {
 		-- install python specific config
 		require("dap-python").setup('~/.virtualenvs/debugpy/bin/python')
 
-		--require('jdtls.dap').setup_dap_main_class_configs()
+		-- require('jdtls.dap').setup_dap_main_class_configs(),
+		-- require'jdtls'.test_class()
+		-- require'jdtls'.test_nearest_method()
 
 		-- install C specific config
 		--if not dap.adapters["codelldb"] then
@@ -105,34 +107,41 @@ return {
 			}
 		end
 
-		-- dap.adapters.java = function(callback)
-		-- 	callback({
-		-- 		type = 'server',
-		-- 		host = '127.0.0.1',
-		-- 		port = 5005,
-		-- 	})
-		-- end
-		--
-		-- -- install java specific config
-		-- dap.configurations.java = {
-		-- 	{
-  --               type = "java",
-		-- 		request = "attach",
-		-- 		name = "Debug (Attach) - Remote",
-		-- 		hostName = "127.0.0.1",
-		-- 		port = 5005,
-		-- 	},
-		-- 	{
-		-- 		name = "Launch YourClassName",
-		-- 		type = "java",
-		-- 		request = "launch",
-		-- 		classPaths = {},
-		-- 		javaExec = "/usr/bin/java",
-		-- 	}
-		-- }
-		--
+		dap.adapters.java = {
+			type = 'executable',
+			command = 'java',
+			args = {'-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005'},
+			env = { 'JAVA_HOME=/home/htetmyat/jdk-21.0.2/bin' }, -- Adjust the path accordingly
+			cwd = vim.fn.getcwd(),
+			sourceMaps = true,
+			stopOnEntry = false,
+			breakpoints = true,
+		}
+		
+		-- install java specific config
+		dap.configurations.java = {
+			{
+				type = 'java',
+				request = 'attach',
+				name = 'Debug (Attach) - Remote',
+				hostName = '127.0.0.1',
+				port = 5005,
+			},
+			{
+				-- extend the classPath to list your dependencies
+				-- nvim-jdtls would automatically add the classPaths property if it's missing
+				classPaths = {},
+				projectName = "yourProjectName",
+	            javaExec = '/home/htetmyat/jdk-21.0.2/bin/java',
+				mainClass = 'project.bin.',
+
+				-- if using jdk9+ module system, this needs to be extended
+				-- nvim-jdtls woudl automatically populate this property
+				modulePaths={},
+				name = "Launch YourClassName",
+				request = "launch",
+				type = 'java'
+			},
+		}
 	end
 }
-	-- name = "Debug (Attach) - Remote",
-	-- hostName = "127.0.0.1",
-	-- port = 5005,

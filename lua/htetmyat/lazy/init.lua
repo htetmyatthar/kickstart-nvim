@@ -4,8 +4,7 @@ return {
 	"tpope/vim-rhubarb",
 
 	-- detect tabstop and shiftwidth automatically
-	--"tpope/vim-sleuth",
-	-- I set those as defaults in set.lua
+	--"tpope/vim-sleuth", -- I set those as defaults in set.lua if you want it uncomment
 
 	"nvim-lua/plenary.nvim",
 
@@ -15,12 +14,14 @@ return {
 	-- useful plugin to show you pending keybinds.
 	{ "folke/which-key.nvim", opts = {} },
 
-	-- {
-	-- 	-- add indentation guides even on blank lines
-	-- 	"lukas-reineke/indent-blankline.nvim",
-	-- 	main = "ibl",
-	-- 	opts = {},
-	-- },
+	--[[ 
+		{
+			-- add indentation guides even on blank lines
+			"lukas-reineke/indent-blankline.nvim",
+			main = "ibl",
+			opts = {},
+		},
+	]]
 
 	{
 		-- Set lualine as statusline
@@ -29,9 +30,41 @@ return {
 			options = {
 				icons_enabled = false,
 				theme = "auto",
-				component_seperators = "|",
-				section_seperators = '',
+				section_separators = '',
+				component_separators = '',
+				disabled_filetypes = {
+					statusline = {},
+					winbar = {},
+				},
+				ignore_focus = {},
+				always_divide_middle = true,
+				globalstatus = false,
+				refresh = {
+					statusline = 1000,
+					tabline = 1000,
+					winbar = 1000,
+				}
 			},
+			sections = {
+				lualine_a = {'mode'},
+				lualine_b = {'branch', 'diff', 'diagnostics'},
+				lualine_c = {{'filename', path = 1}},
+				lualine_x = {'encoding', 'fileformat', 'filetype'},
+				lualine_y = {'progress'},
+				lualine_z = {'location'},
+			},
+			inactive_sections = {
+				lualine_a = {},
+				lualine_b = {},
+				lualine_c = {'filename'},
+				lualine_x = {'location'},
+				lualine_y = {},
+				lualine_z = {}
+			},
+			tabline = {},
+			winbar = {},
+			inactive_winbar = {},
+			extensions = {}
 		},
 	},
 	{

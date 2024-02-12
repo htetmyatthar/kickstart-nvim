@@ -107,6 +107,7 @@ return {
 			}
 		end
 
+	--[[ 	
 		dap.adapters.java = {
 			type = 'executable',
 			command = 'java',
@@ -143,5 +144,6 @@ return {
 				type = 'java'
 			},
 		}
+	]]
 	end
 }

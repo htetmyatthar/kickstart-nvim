@@ -11,6 +11,7 @@ return {
 					"c", "cpp", "go", "lua", "python", "javascript", "typescript", "tsx", "rust", "bash",
 					"html", "css", "htmldjango", "java"
 				},
+				modules = {},
 				auto_install = false,
 				sync_install = false,
 				ignore_install = {},

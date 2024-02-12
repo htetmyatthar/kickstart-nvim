@@ -119,7 +119,7 @@ return {
 				init_options = {
 					bundles = {
 						-- java-debug-adapter microsoft
-						vim.fn.glob('.local/share/nvim/mason/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-0.50.0.jar', 1),
+						--vim.fn.glob('.local/share/nvim/mason/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-0.50.0.jar', 1),
 					}
 				},
 			},

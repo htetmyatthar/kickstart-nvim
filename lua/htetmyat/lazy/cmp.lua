@@ -44,6 +44,5 @@ cmp.setup ({
 })
 
 return {
-
-	Luasnip.config.setup ({})
+	Luasnip.config.setup ({}),
 }

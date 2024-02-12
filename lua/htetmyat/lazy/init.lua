@@ -49,4 +49,8 @@ return {
 			"rafamadriz/friendly-snippets",
 		},
 	},
+	{
+		"rose-pine/neovim",
+		name = "rose-pine",
+	},
 }

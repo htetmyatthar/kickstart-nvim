@@ -4,11 +4,6 @@ return {
 	-- "navarasu/onedark.nvim",
 	rose_pine = require("rose-pine"),
 	require("rose-pine").setup({
-		enable = {
-			terminal = true,
-			legacy_highlights = true,	-- improve compatibility for previous versions of neovim
-			migrations = true,	-- handle deprecated options automatically
-		},
 		styles = {
 			italic = false,
 			bold = true,

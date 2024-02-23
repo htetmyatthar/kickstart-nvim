@@ -4,6 +4,8 @@ vim.g.maplocalleader = ' '
 
 vim.opt.tabstop = 4
 
+vim.opt.inccommand = 'split'
+
 vim.o.softtabstop = 4
 
 vim.o.shiftwidth = 4

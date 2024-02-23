@@ -33,3 +33,18 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 -- see lazy.lsp for this command.
 vim.keymap.set("n", "<leader>ft", vim.cmd.Format, {desc = "[F]ormat [T]his file"})
+
+-- open split terminal
+vim.keymap.set("n", "st", ":split<CR>:wincmd j<CR>:term<CR>", {desc = "[S]plit [T]erminal"})
+
+-- open tab terminal
+vim.keymap.set("n", "tt", ":tabnew<CR>:term<CR>", {desc = "[T]ab [T]erminal"})
+
+-- current buffer dir is root now
+vim.keymap.set("n", "FR", ":cd %:p:h<CR>", {desc = "current [F]ile dir is [R]oot"})
+
+-- exit terminal
+vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>", {desc = "Escape Escape exits terminal mode."})
+
+-- change to vb for visual block mode since I'm using copy paste.
+vim.api.nvim_set_keymap("n", "vb", "<C-v>", {noremap = true})

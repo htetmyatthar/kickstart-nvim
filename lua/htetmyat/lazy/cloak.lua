@@ -18,5 +18,6 @@ return {
 				},
 			},
 		})
-	end
+	end,
+	vim.keymap.set("n", "<C-t>", vim.cmd.CloakToggle , { desc = "[T]oggle [C]loak"})
 }

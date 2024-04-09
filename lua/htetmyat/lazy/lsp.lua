@@ -12,6 +12,9 @@ return {
 		-- Additional lua configuration
 		"folke/neodev.nvim",
 	},
+	opts = {
+		inlay_hints = { enabled = true }
+	},
 	config = function()
 		local on_attach = function(_, bufnr)
 			local nmap = function(keys, func, desc)
@@ -19,7 +22,7 @@ return {
 					desc = "LSP: " .. desc
 				end
 
-				vim.keymap.set("n", keys, func, {buffer = bufnr, desc = desc})
+				vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
 			end
 			nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[N]ame")
 			nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode[A]ction")
@@ -35,7 +38,7 @@ return {
 			nmap("K", vim.lsp.buf.hover, "Hover Documentation")
 			nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
 
-			  -- Lesser used LSP functionality
+			-- Lesser used LSP functionality
 			nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 			nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
 			nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
@@ -46,7 +49,7 @@ return {
 			-- Create a command `:Format` local to the LSP buffer
 			vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
 				vim.lsp.buf.format()
-				end, { desc = 'Format current buffer with LSP' })
+			end, { desc = 'Format current buffer with LSP' })
 		end
 		-- document existing key chains
 		require('which-key').register {
@@ -57,72 +60,127 @@ return {
 			['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
 			['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
 			['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
-			}
+			['<leader>W'] = { name = 'buffer [W]indow', _ = 'which_key_ignore' },
+		}
 
 		-- we are strict to make this order.
-		require("mason").setup()				-- setup mason
-		require("mason-lspconfig").setup()		-- setup mason-lspconfi
+		require("mason").setup()     -- setup mason
+		require("mason-lspconfig").setup() -- setup mason-lspconfi
 
-		--local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
-		--local workspace_dir = 'java/'.. project_name
+		local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
+		local workspace_dir = '~/java/' .. project_name
 
 		local servers = {
-			clangd = {},
-			gopls = {},
+			clangd = {
+			},
+			gopls = {
+				filetypes = {"go", "gomod", "gowork", "gotmpl"},
+				allExperiments = true,
+				templateExtensions = { "gohtmltmpl", "gohtml", "gotmpl", ".html.gotmpl", ".gotmpl.html" },
+				gofumpt = true,
+				analyses = {
+					unusedparams = true,
+					fieldalignment = true,
+					unusedvariable = true,
+				},
+				vulncheck = "Imports",
+				staticcheck = true,
+				hints = {
+					assignVariableTypes = true,
+					compositeLiteralFields = true,
+					compositeLiteralTypes = true,
+					constantValues = true,
+					functionTypeParameters = true,
+					parameterNames = true,
+					rangeVariableTypes = true,
+				},
+			},
 			pyright = {},
-			tsserver = {},
 			rust_analyzer = {},
-
-			lua_ls = {
-				Lua = {
-					workspace = {checkThirdParty = false},
-					telemetry = {enable = false},
+			tsserver = {
+				-- taken from https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
+				javascript = {
+					inlayHints = {
+						includeInlayEnumMemberValueHints = true,
+						includeInlayFunctionLikeReturnTypeHints = true,
+						includeInlayFunctionParameterTypeHints = true,
+						includeInlayParameterNameHints = 'all',
+						includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+						includeInlayPropertyDeclarationTypeHints = true,
+						includeInlayVariableTypeHints = true,
+					},
+				},
+				typescript = {
+					inlayHints = {
+						includeInlayEnumMemberValueHints = true,
+						includeInlayFunctionLikeReturnTypeHints = true,
+						includeInlayFunctionParameterTypeHints = true,
+						includeInlayParameterNameHints = 'all',
+						includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+						includeInlayPropertyDeclarationTypeHints = true,
+						includeInlayVariableTypeHints = true,
+					},
 				},
 			},
 
-			-- jdtls = {
-			-- 	root_dir = vim.fs.dirname(vim.fs.find({'gradlew', 'mvnw'}, {upward = true})[1]),
-			-- 	-- command that starts the language server
-			-- 	cmd = {
-			-- 		-- jdtls executable
-			-- 		'.local/share/nvim/mason/packages/jdtls/jdtls',
-			--
-			-- 		-- java or path to java executable
-			-- 		'java',
-			--
-			-- 		'-Declipse.application=org.eclipse.jdt.ls.core.id1',
-			-- 		'-Dosgi.bundles.defaultStartLevel=4',
-			-- 		'-Declipse.product=org.eclipse.jdt.ls.core.product',
-			-- 		'-Dlog.protocol=true',
-			-- 		'-Dlog.level=ALL',
-			-- 		'-Xmx1g',
-			-- 		'--add-modules=ALL-SYSTEM',
-			-- 		'--add-opens', 'java.base/java.util=ALL-UNNAMED',
-			-- 		'--add-opens', 'java.base/java.lang=ALL-UNNAMED',
-			--
-			-- 		-- jar path
-			-- 		'-jar', '.local/share/nvim/mason/packages/jdtls/plugins/org.eclipse.equinox.launcher_1.6.700.v20231214-2017.jar',
-			--
-			-- 		-- config system
-			-- 		'-configuration', '.local/share/nvim/mason/packages/jdtls/config_linux',
-			--
-			-- 		-- data
-			-- 		'-data', workspace_dir,
-			-- 	},
-			-- 	--
-			-- 	-- settings = {
-			-- 	-- 	java = {
-			-- 	--
-			-- 	-- 	}
-			-- 	-- },
-			-- 	--
-			-- 	-- init_options = {
-			-- 	-- 	bundles = {
-			-- 	-- 		-- java-debug-adapter microsoft
-			-- 	-- 		vim.fn.glob('.local/share/nvim/mason/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-0.50.0.jar', false),
-			-- 	-- 	}
-			-- 	-- },
-			-- },
+			lua_ls = {
+				Lua = {
+					workspace = { checkThirdParty = false },
+					telemetry = { enable = false },
+					hint = { enable = true },
+				},
+			},
+
+			jdtls = {
+				root_dir = [[{
+							vim.fs.dirname(vim.fs.find({".git", "gradlew", "mvnw",}, {upward = true})[1])
+							},
+							{
+							".git"
+							},
+				]],
+				-- command that starts the language server
+				cmd = {
+					-- jdtls executable
+					'.local/share/nvim/mason/packages/jdtls/jdtls',
+
+					-- java or path to java executable
+					'java',
+
+					'-Declipse.application=org.eclipse.jdt.ls.core.id1',
+					'-Dosgi.bundles.defaultStartLevel=4',
+					'-Declipse.product=org.eclipse.jdt.ls.core.product',
+					'-Dlog.protocol=true',
+					'-Dlog.level=ALL',
+					'-Xmx1g',
+					'--add-modules=ALL-SYSTEM',
+					'--add-opens', 'java.base/java.util=ALL-UNNAMED',
+					'--add-opens', 'java.base/java.lang=ALL-UNNAMED',
+
+					-- jar path
+					'-jar',
+					'.local/share/nvim/mason/packages/jdtls/plugins/org.eclipse.equinox.launcher_1.6.700.v20231214-2017.jar',
+
+					-- config system
+					'-configuration', '.local/share/nvim/mason/packages/jdtls/config_linux',
+
+					-- data
+					'-data', workspace_dir,
+				},
+				--
+				-- settings = {
+				-- 	java = {
+				--
+				-- 	}
+				-- },
+				--
+				-- init_options = {
+				-- 	bundles = {
+				-- 		-- java-debug-adapter microsoft
+				-- 		vim.fn.glob('.local/share/nvim/mason/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-0.50.0.jar', false),
+				-- 	}
+				-- },
+			},
 		}
 		require("neodev").setup()
 		-- nvim-cmp supports additional completion capabilities, so broadcast that to servers
@@ -143,5 +201,5 @@ return {
 				}
 			end,
 		}
-	end
+	end,
 }

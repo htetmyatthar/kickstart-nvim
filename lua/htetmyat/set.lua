@@ -6,44 +6,44 @@ vim.opt.tabstop = 4
 
 vim.opt.inccommand = 'split'
 
-vim.o.softtabstop = 4
+vim.opt.softtabstop = 4
 
-vim.o.shiftwidth = 4
+vim.opt.shiftwidth = 4
 
-vim.o.hlsearch = false
+vim.opt.hlsearch = false
 
 vim.wo.number = true
 
 vim.wo.relativenumber = true
 
-vim.o.mouse = "a"
+vim.opt.mouse = "a"
 
-vim.o.clipboard = "unnamedplus"
+vim.opt.clipboard = "unnamedplus"
 
-vim.o.undofile = true
+vim.opt.undofile = true
 
-vim.o.ignorecase = true
+vim.opt.ignorecase = true
 
-vim.o.smartcase = true
+vim.opt.smartcase = true
 
 vim.wo.signcolumn = "yes"
 
-vim.o.updatetime = 250
+vim.opt.updatetime = 250
 
-vim.o.timeoutlen = 300
+vim.opt.timeoutlen = 300
 
-vim.o.completeopt = "menuone,noselect"
+vim.opt.completeopt = "menuone,noselect"
 
-vim.o.termguicolors = true
+vim.opt.termguicolors = true
 
-vim.o.breakindent = true
+vim.opt.breakindent = true
 
-vim.o.smartindent = true
+vim.opt.smartindent = true
 
-vim.o.wrap = false
+vim.opt.wrap = false
 
-vim.o.swapfile = false
+vim.opt.swapfile = false
 
-vim.o.backup = false
+vim.opt.backup = false
 
-vim.o.scrolloff = 8
+vim.opt.scrolloff = 8

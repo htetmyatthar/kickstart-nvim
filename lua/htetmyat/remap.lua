@@ -39,6 +39,7 @@ vim.keymap.set("n", "st", ":split<CR>:wincmd j<CR>:term<CR>", {desc = "[S]plit [
 
 -- open tab terminal
 vim.keymap.set("n", "tt", ":tabnew<CR>:term<CR>", {desc = "[T]ab [T]erminal"})
+-- to switch between tabs use 'gt' to next or 'gT' to previous
 
 -- current buffer dir is root now
 vim.keymap.set("n", "FR", ":cd %:p:h<CR>", {desc = "current [F]ile dir is [R]oot"})
@@ -48,3 +49,19 @@ vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>", {desc = "Escape Escape exits te
 
 -- change to vb for visual block mode since I'm using copy paste.
 vim.api.nvim_set_keymap("n", "vb", "<C-v>", {noremap = true})
+
+-- inlay hints for globally; uncomment if you want inlay hints
+-- vim.api.nvim_create_autocmd("LspAttach", {
+-- 	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+-- 	callback = function(args)
+-- 		local client = vim.lsp.get_client_by_id(args.data.client_id)
+-- 		if client ~= nil then
+-- 			if client.server_capabilities.inlayHintProvider then
+-- 				vim.lsp.inlay_hint.enable(args.buf, true)
+-- 				print(client.server_capabilities.inlayHintProvider)
+-- 			end
+-- 			-- whatever other lsp config you want
+-- 		end
+-- 		print("client is nil")
+-- 	end
+-- })

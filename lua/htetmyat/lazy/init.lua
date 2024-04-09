@@ -3,8 +3,8 @@ return {
 	"tpope/vim-fugitive",
 	"tpope/vim-rhubarb",
 
-	-- detect tabstop and shiftwidth automatically
-	--"tpope/vim-sleuth", -- I set those as defaults in set.lua if you want it uncomment
+	-- -- detect tabstop and shiftwidth automatically
+	-- "tpope/vim-sleuth", -- I set those as defaults in set.lua if you want it uncomment
 
 	"nvim-lua/plenary.nvim",
 
@@ -86,4 +86,22 @@ return {
 		"rose-pine/neovim",
 		name = "rose-pine",
 	},
+
+	{
+		"sourcegraph/sg.nvim",
+		dependencies = { "nvim-lua/plenary.nvim", --[[ "nvim-telescope/telescope.nvim ]] },
+
+		-- -- If you have a recent version of lazy.nvim, you don't need to add this!
+		-- build = "nvim -l build/init.lua",
+	},
+	{
+		"olexsmir/gopher.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+		},
+		build = function()
+			vim.cmd [[silent! GoInstallDeps]]
+		end,
+	}
 }

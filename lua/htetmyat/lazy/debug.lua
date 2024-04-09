@@ -107,16 +107,12 @@ return {
 			}
 		end
 
-	--[[ 	
 		dap.adapters.java = {
 			type = 'executable',
 			command = 'java',
 			args = {'-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005'},
 			env = { 'JAVA_HOME=/home/htetmyat/jdk-21.0.2/bin' }, -- Adjust the path accordingly
 			cwd = vim.fn.getcwd(),
-			sourceMaps = true,
-			stopOnEntry = false,
-			breakpoints = true,
 		}
 		
 		-- install java specific config
@@ -131,19 +127,18 @@ return {
 			{
 				-- extend the classPath to list your dependencies
 				-- nvim-jdtls would automatically add the classPaths property if it's missing
-				classPaths = {},
-				projectName = "yourProjectName",
+				classPaths = {"$Auto"},
+				projectName = "my-app",
 	            javaExec = '/home/htetmyat/jdk-21.0.2/bin/java',
-				mainClass = 'project.bin.',
+				mainClass = '${file}',
 
 				-- if using jdk9+ module system, this needs to be extended
 				-- nvim-jdtls woudl automatically populate this property
-				modulePaths={},
-				name = "Launch YourClassName",
+				modulePaths={"$Auto"},
+				name = "Launch This File",
 				request = "launch",
 				type = 'java'
 			},
 		}
-	]]
 	end
 }

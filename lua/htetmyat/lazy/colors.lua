@@ -16,6 +16,7 @@ return {
 			styles = {
 				italic = false,
 				bold = true,
+				transparency = true,
 			},
 			disable_background = true,
 		})

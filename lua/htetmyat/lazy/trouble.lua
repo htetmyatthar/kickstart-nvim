@@ -8,7 +8,7 @@ return {
 
 			vim.keymap.set("n", "<leader>tt", function()
 				require("trouble").toggle()
-			end)
+			end, { desc = "[T]oggle [T]rouble" })
 
 			vim.keymap.set("n", "[t", function()
 				require("trouble").next({ skip_groups = true, jump = true });
@@ -17,6 +17,10 @@ return {
 			vim.keymap.set("n", "]t", function()
 				require("trouble").previous({ skip_groups = true, jump = true });
 			end)
-		end
+		end,
+		require("which-key").register {
+			["<leader>t"] = { name = "[T]oggle", _ = "which_key_ignore" },
+			["<leader>tt"] = { name = "[T]oggle [T]rouble", _ = "which_key_ignore" },
+		},
 	}
 }

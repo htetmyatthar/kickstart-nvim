@@ -19,5 +19,8 @@ return {
 			},
 		})
 	end,
-	vim.keymap.set("n", "<C-t>", vim.cmd.CloakToggle , { desc = "[T]oggle [C]loak"})
+	vim.keymap.set("n", "<leader>tc", vim.cmd.CloakToggle , { desc = "[T]oggle [C]loak"}),
+	require("which-key").register {
+		["<leader>tc"] = { name = "[T]oggle [C]loak", _ = "which_key_ignore" },
+	}
 }

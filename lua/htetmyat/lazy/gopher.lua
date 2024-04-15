@@ -1,6 +1,5 @@
 return {
 	require('which-key').register {
-			['<leader>'] = { name = '[A]dd automatically', _ = 'which_key_ignore' },
 			['<leader>G'] = { name = '[A]dd automatically golang', _ = 'which_key_ignore' },
 	},
 	vim.keymap.set("n", "<leader>Gj", "<Cmd> GoTagAdd json <CR>", {desc = "add [G]o [J]son tag"}),

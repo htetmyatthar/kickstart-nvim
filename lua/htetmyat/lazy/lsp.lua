@@ -68,13 +68,13 @@ return {
 		require("mason-lspconfig").setup() -- setup mason-lspconfi
 
 		local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
-		local workspace_dir = '~/java/' .. project_name
+		local workspace_dir = '~/java_workspace/' .. project_name
 
 		local servers = {
 			clangd = {
 			},
 			gopls = {
-				filetypes = {"go", "gomod", "gowork", "gotmpl"},
+				filetypes = { "go", "gomod", "gowork", "gotmpl" },
 				allExperiments = true,
 				templateExtensions = { "gohtmltmpl", "gohtml", "gotmpl", ".html.gotmpl", ".gotmpl.html" },
 				gofumpt = true,
@@ -132,17 +132,23 @@ return {
 			},
 
 			jdtls = {
-				root_dir = [[{
-							vim.fs.dirname(vim.fs.find({".git", "gradlew", "mvnw",}, {upward = true})[1])
-							},
-							{
-							".git"
-							},
-				]],
+				root_dir = {
+					{
+						'build.xml', -- Ant
+						'pom.xml', -- Maven
+						'settings.gradle', -- Gradle
+						'settings.gradle.kts', -- Gradle
+					},
+					{
+						"build.gradle",
+						"build.gradle.kts",
+					},
+				} or vim.fn.getcwd()
+				,
 				-- command that starts the language server
 				cmd = {
 					-- jdtls executable
-					'.local/share/nvim/mason/packages/jdtls/jdtls',
+					os.getenv("HOME") .. '.local/share/nvim/mason/packages/jdtls/jdtls',
 
 					-- java or path to java executable
 					'java',
@@ -153,33 +159,59 @@ return {
 					'-Dlog.protocol=true',
 					'-Dlog.level=ALL',
 					'-Xmx1g',
+					-- lombok path
+					'-javaagent:' .. os.getenv("HOME") .. '.local/share/nvim/mason/packages/jdtls/lombok.jar',
 					'--add-modules=ALL-SYSTEM',
 					'--add-opens', 'java.base/java.util=ALL-UNNAMED',
 					'--add-opens', 'java.base/java.lang=ALL-UNNAMED',
 
 					-- jar path
 					'-jar',
+					os.getenv("HOME") ..
 					'.local/share/nvim/mason/packages/jdtls/plugins/org.eclipse.equinox.launcher_1.6.700.v20231214-2017.jar',
 
 					-- config system
-					'-configuration', '.local/share/nvim/mason/packages/jdtls/config_linux',
+					'-configuration', os.getenv("HOME") .. '.local/share/nvim/mason/packages/jdtls/config_linux',
 
 					-- data
 					'-data', workspace_dir,
 				},
-				--
-				-- settings = {
-				-- 	java = {
-				--
-				-- 	}
-				-- },
-				--
-				-- init_options = {
-				-- 	bundles = {
-				-- 		-- java-debug-adapter microsoft
-				-- 		vim.fn.glob('.local/share/nvim/mason/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-0.50.0.jar', false),
-				-- 	}
-				-- },
+
+				-- this is for Eclipse jdtls server configuration
+				settings = {
+					java = {
+						references = {
+							includeDecompiledSources = true,
+						},
+						format = {
+							enabled = true,
+						},
+						eclipse = {
+							downloadSources = true,
+						},
+						maven = {
+							downloadSources = true,
+						},
+						inlayHints = {
+							parameterNames = {
+								enabled = "all", -- literals, all, none
+							},
+						},
+						importOrder = {
+							"java", "javax", "com", "org",
+						},
+					}
+				},
+
+				-- initialization options
+				init_options = {
+					bundles = {
+						vim.fn.glob(
+							os.getenv("HOME") ..
+							"java_workspace/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar",
+							true)
+					}
+				},
 			},
 		}
 		require("neodev").setup()

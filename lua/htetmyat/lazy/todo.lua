@@ -7,7 +7,11 @@ return {
 		keywords = {
 			IDEA = { icon = " ", color = "default"},
 			ALERT = { icon = " ", color = "warning"},
+			DONE = { icon = " ", color = "green"}
 		},
+		colors = {
+			green = { "FIXED, FINISHED", "#31CB00"}
+		}
 	},
 
 	-- map to find the todos with telescope.

@@ -4,6 +4,7 @@ return {
 		"rcarriga/nvim-dap-ui",
 		"williamboman/mason.nvim",
 		"jay-babu/mason-nvim-dap.nvim",
+		"nvim-neotest/nvim-nio",
 
 		-- for golang
 		"leoluz/nvim-dap-go",

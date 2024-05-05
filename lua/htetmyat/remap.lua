@@ -65,3 +65,10 @@ vim.api.nvim_set_keymap("n", "vb", "<C-v>", {noremap = true})
 -- 		print("client is nil")
 -- 	end
 -- })
+--
+-- if you don't use unnameplus in clip board use the following two
+--	   copy to sys clipboard the selected text
+-- vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
+--     copy to sys clipboard the current line
+-- vim.keymap.set("n", "<leader>Y", [["+Y]])
+

@@ -24,6 +24,7 @@ return {
 
 				vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
 			end
+			-- rename the variables and such
 			nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[N]ame")
 			nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode[A]ction")
 
@@ -31,7 +32,7 @@ return {
 			nmap("gd", builtin.lsp_definitions, "[G]oto [D]efinition")
 			nmap("gr", builtin.lsp_references, "[G]oto [R]eferences")
 			nmap("gI", builtin.lsp_implementations, "[G]oto [I]mplementation")
-			nmap("<leader>D", builtin.lsp_type_definitions, "Tupe [D]efinition")
+			nmap("<leader>D", builtin.lsp_type_definitions, "Type [D]efinition")
 			nmap("<leader>ds", builtin.lsp_document_symbols, "[D]ocument [S]ymbol")
 			nmap("<leader>ws", builtin.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
 

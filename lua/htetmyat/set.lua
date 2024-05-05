@@ -2,9 +2,9 @@ vim.g.mapleader = ' '
 
 vim.g.maplocalleader = ' '
 
-vim.opt.tabstop = 4
-
 vim.opt.inccommand = 'split'
+
+vim.opt.tabstop = 4
 
 vim.opt.softtabstop = 4
 
@@ -47,3 +47,5 @@ vim.opt.swapfile = false
 vim.opt.backup = false
 
 vim.opt.scrolloff = 8
+
+-- vim.opt.smartindent = true

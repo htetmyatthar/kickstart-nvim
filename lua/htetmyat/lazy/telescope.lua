@@ -1,5 +1,5 @@
 return {
-
+	-- due to incompatibilities with nvim-jdtls, download from the source github.
 	"nvim-telescope/telescope.nvim",
 	branch = "0.1.x",
 	dependencies = {

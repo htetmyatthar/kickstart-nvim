@@ -7,7 +7,8 @@ return {
 		keywords = {
 			IDEA = { icon = " ", color = "default"},
 			ALERT = { icon = " ", color = "warning"},
-			DONE = { icon = " ", color = "green"}
+			DONE = { icon = " ", color = "green"},
+			todo = { icon = " ", color = "hint"}	-- small todo for my self.
 		},
 		colors = {
 			green = { "FIXED, FINISHED", "#31CB00"}

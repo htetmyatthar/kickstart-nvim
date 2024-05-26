@@ -37,7 +37,7 @@ return {
 			nmap("<leader>ws", builtin.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
 
 			nmap("K", vim.lsp.buf.hover, "Hover Documentation")
-			nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
+			-- nmap("<C-;>", vim.lsp.buf.signature_help, "Signature Documentation")
 
 			-- Lesser used LSP functionality
 			nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -68,9 +68,6 @@ return {
 		require("mason").setup()     -- setup mason
 		require("mason-lspconfig").setup() -- setup mason-lspconfi
 
-		local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
-		local workspace_dir = '~/java_workspace/' .. project_name
-
 		local servers = {
 			clangd = {
 			},
@@ -86,15 +83,19 @@ return {
 				},
 				vulncheck = "Imports",
 				staticcheck = true,
-				hints = {
-					assignVariableTypes = true,
-					compositeLiteralFields = true,
-					compositeLiteralTypes = true,
-					constantValues = true,
-					functionTypeParameters = true,
-					parameterNames = true,
-					rangeVariableTypes = true,
-				},
+				settings = {
+					gopls = {
+						hints = {
+							assignVariableTypes = true,
+							compositeLiteralFields = true,
+							compositeLiteralTypes = true,
+							constantValues = true,
+							functionTypeParameters = true,
+							parameterNames = true,
+							rangeVariableTypes = true,
+						},
+					}
+				}
 			},
 			pyright = {},
 			rust_analyzer = {},
@@ -131,89 +132,6 @@ return {
 					hint = { enable = true },
 				},
 			},
-
-			jdtls = {
-				root_dir = {
-					{
-						'build.xml', -- Ant
-						'pom.xml', -- Maven
-						'settings.gradle', -- Gradle
-						'settings.gradle.kts', -- Gradle
-					},
-					{
-						"build.gradle",
-						"build.gradle.kts",
-					},
-				} or vim.fn.getcwd()
-				,
-				-- command that starts the language server
-				cmd = {
-					-- jdtls executable
-					os.getenv("HOME") .. '.local/share/nvim/mason/packages/jdtls/jdtls',
-
-					-- java or path to java executable
-					'java',
-
-					'-Declipse.application=org.eclipse.jdt.ls.core.id1',
-					'-Dosgi.bundles.defaultStartLevel=4',
-					'-Declipse.product=org.eclipse.jdt.ls.core.product',
-					'-Dlog.protocol=true',
-					'-Dlog.level=ALL',
-					'-Xmx1g',
-					-- lombok path
-					'-javaagent:' .. os.getenv("HOME") .. '.local/share/nvim/mason/packages/jdtls/lombok.jar',
-					'--add-modules=ALL-SYSTEM',
-					'--add-opens', 'java.base/java.util=ALL-UNNAMED',
-					'--add-opens', 'java.base/java.lang=ALL-UNNAMED',
-
-					-- jar path
-					'-jar',
-					os.getenv("HOME") ..
-					'.local/share/nvim/mason/packages/jdtls/plugins/org.eclipse.equinox.launcher_1.6.700.v20231214-2017.jar',
-
-					-- config system
-					'-configuration', os.getenv("HOME") .. '.local/share/nvim/mason/packages/jdtls/config_linux',
-
-					-- data
-					'-data', workspace_dir,
-				},
-
-				-- this is for Eclipse jdtls server configuration
-				settings = {
-					java = {
-						references = {
-							includeDecompiledSources = true,
-						},
-						format = {
-							enabled = true,
-						},
-						eclipse = {
-							downloadSources = true,
-						},
-						maven = {
-							downloadSources = true,
-						},
-						inlayHints = {
-							parameterNames = {
-								enabled = "all", -- literals, all, none
-							},
-						},
-						importOrder = {
-							"java", "javax", "com", "org",
-						},
-					}
-				},
-
-				-- initialization options
-				init_options = {
-					bundles = {
-						vim.fn.glob(
-							os.getenv("HOME") ..
-							"java_workspace/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar",
-							true)
-					}
-				},
-			},
 		}
 		require("neodev").setup()
 		-- nvim-cmp supports additional completion capabilities, so broadcast that to servers
@@ -226,12 +144,14 @@ return {
 		}
 		mason_lspconfig.setup_handlers {
 			function(server_name)
-				require('lspconfig')[server_name].setup {
-					capabilities = capabilities,
-					on_attach = on_attach,
-					settings = servers[server_name],
-					filetypes = (servers[server_name] or {}).filetypes,
-				}
+				if (server_name ~= 'jdtls') then
+					require('lspconfig')[server_name].setup {
+						capabilities = capabilities,
+						on_attach = on_attach,
+						settings = servers[server_name],
+						filetypes = (servers[server_name] or {}).filetypes,
+					}
+				end
 			end,
 		}
 	end,

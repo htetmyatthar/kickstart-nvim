@@ -1,3 +1,4 @@
+-- to use with rose-pine
 function ColorMyPencil(color)
 	color = color or "rose-pine"
 	vim.cmd.colorscheme(color)
@@ -7,20 +8,44 @@ function ColorMyPencil(color)
 end
 
 return {
-	"rose-pine/neovim",
-	-- "folke/tokyonight.nvim",
+	-- "rose-pine/neovim",
+	-- name = "rose-pine",
 	-- "navarasu/onedark.nvim",
-	name = "rose-pine",
+	-- name = "onedark"
+	-- "projekt0n/github-nvim-theme",
+	"folke/tokyonight.nvim",
+	name = "tokyonight",
+	lazy = false,
+	priority = 10000,
 	config = function()
-		require("rose-pine").setup({
+		-- rose-pine color setup
+		-- require("rose-pine").setup({
+		-- 	variant = "moon",
+		-- 	styles = {
+		-- 		italic = false,
+		-- 		bold = false,
+		-- 		transparency = true,
+		-- 	},
+		-- 	disable_background = true,
+		-- })
+		-- vim.cmd("colorscheme rose-pine")
+		-- ColorMyPencil("nightfly")
+
+		-- tokyonight color setup
+		require("tokyonight").setup({
+			style = "moon",
+			transparent = true,
 			styles = {
-				italic = false,
-				bold = true,
-				transparency = true,
-			},
-			disable_background = true,
+				comments = { italic = false },
+				keywords = { italic = false },
+			}
 		})
-		vim.cmd("colorscheme rose-pine")
-		ColorMyPencil()
+		vim.cmd("colorscheme tokyonight")
+		ColorMyPencil("tokyonight")
+
+		-- github color setup
+		-- require("github-theme").setup({
+		-- })
+		-- vim.cmd("colorscheme github_dark_default")
 	end
 }

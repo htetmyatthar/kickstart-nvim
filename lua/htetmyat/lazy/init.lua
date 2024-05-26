@@ -7,6 +7,7 @@ return {
 	-- "tpope/vim-sleuth", -- I set those as defaults in set.lua if you want it uncomment
 
 	"nvim-lua/plenary.nvim",
+	"mfussenegger/nvim-jdtls",
 
 	-- "gc" to comment visual regions/lines
 	{"numToStr/Comment.nvim", opts = {} },
@@ -71,6 +72,8 @@ return {
 		-- Autocompletoin
 		"hrsh7th/nvim-cmp",
 		dependencies = {
+			-- js-regexp library for luasnip
+			"kmarius/jsregexp",
 			-- Snippet Engine & it's associated nvim-cmp source
 			"L3MON4D3/LuaSnip",
 			"saadparwaiz1/cmp_luasnip",
@@ -86,22 +89,11 @@ return {
 		"rose-pine/neovim",
 		name = "rose-pine",
 	},
-
-	{
-		"sourcegraph/sg.nvim",
-		dependencies = { "nvim-lua/plenary.nvim", --[[ "nvim-telescope/telescope.nvim ]] },
-
-		-- -- If you have a recent version of lazy.nvim, you don't need to add this!
-		-- build = "nvim -l build/init.lua",
-	},
-	{
-		"olexsmir/gopher.nvim",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-treesitter/nvim-treesitter",
-		},
-		build = function()
-			vim.cmd [[silent! GoInstallDeps]]
-		end,
-	}
+	-- {
+	-- 	"sourcegraph/sg.nvim",
+	-- 	dependencies = { "nvim-lua/plenary.nvim", --[[ "nvim-telescope/telescope.nvim ]] },
+	--
+	-- 	-- -- If you have a recent version of lazy.nvim, you don't need to add this!
+	-- 	-- build = "nvim -l build/init.lua",
+	-- },
 }

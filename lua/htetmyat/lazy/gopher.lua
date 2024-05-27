@@ -1,5 +1,5 @@
 return {
-	-- WARN: to use this plugin you must configure GOPATH, GOBIN to found the executables
+	-- WARN: to use this plugin you must configure GOPATH, GOBIN to found the executables installed by GoInstallDeps
 	{
 		"olexsmir/gopher.nvim",
 		requires = { -- dependencies

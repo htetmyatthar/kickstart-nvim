@@ -3,71 +3,24 @@ return {
 	"tpope/vim-fugitive",
 	"tpope/vim-rhubarb",
 
-	-- -- detect tabstop and shiftwidth automatically
+	-- detect tabstop and shiftwidth automatically
 	-- "tpope/vim-sleuth", -- I set those as defaults in set.lua if you want it uncomment
 
 	"nvim-lua/plenary.nvim",
-	"mfussenegger/nvim-jdtls",
-
-	-- "gc" to comment visual regions/lines
-	{"numToStr/Comment.nvim", opts = {} },
 
 	-- useful plugin to show you pending keybinds.
-	{ "folke/which-key.nvim", opts = {} },
+	"folke/which-key.nvim",
 
-	--[[ 
-		{
-			-- add indentation guides even on blank lines
-			"lukas-reineke/indent-blankline.nvim",
-			main = "ibl",
-			opts = {},
-		},
-	]]
+	-- "gc" to comment visual regions/lines
+	"numToStr/Comment.nvim",
 
 	{
-		-- Set lualine as statusline
-		"nvim-lualine/lualine.nvim",
-		opts = {
-			options = {
-				icons_enabled = false,
-				theme = "auto",
-				section_separators = '',
-				component_separators = '',
-				disabled_filetypes = {
-					statusline = {},
-					winbar = {},
-				},
-				ignore_focus = {},
-				always_divide_middle = true,
-				globalstatus = false,
-				refresh = {
-					statusline = 1000,
-					tabline = 1000,
-					winbar = 1000,
-				}
-			},
-			sections = {
-				lualine_a = {'mode'},
-				lualine_b = {'branch', 'diff', 'diagnostics'},
-				lualine_c = {{'filename', path = 1}},
-				lualine_x = {'encoding', 'fileformat', 'filetype'},
-				lualine_y = {'progress'},
-				lualine_z = {'location'},
-			},
-			inactive_sections = {
-				lualine_a = {},
-				lualine_b = {},
-				lualine_c = {'filename'},
-				lualine_x = {'location'},
-				lualine_y = {},
-				lualine_z = {}
-			},
-			tabline = {},
-			winbar = {},
-			inactive_winbar = {},
-			extensions = {}
+		"mfussenegger/nvim-jdtls",
+		dependencies = {
+			"mfussenegger/nvim-dap",
 		},
 	},
+
 	{
 		-- Autocompletoin
 		"hrsh7th/nvim-cmp",
@@ -85,15 +38,10 @@ return {
 			"rafamadriz/friendly-snippets",
 		},
 	},
+
+	-- lightweight rose-pine colorscheme
 	{
 		"rose-pine/neovim",
 		name = "rose-pine",
 	},
-	-- {
-	-- 	"sourcegraph/sg.nvim",
-	-- 	dependencies = { "nvim-lua/plenary.nvim", --[[ "nvim-telescope/telescope.nvim ]] },
-	--
-	-- 	-- -- If you have a recent version of lazy.nvim, you don't need to add this!
-	-- 	-- build = "nvim -l build/init.lua",
-	-- },
 }

@@ -18,6 +18,7 @@ return {
 	lazy = false,
 	priority = 10000,
 	config = function()
+
 		-- rose-pine color setup
 		-- require("rose-pine").setup({
 		-- 	variant = "moon",
@@ -42,10 +43,5 @@ return {
 		})
 		vim.cmd("colorscheme tokyonight")
 		ColorMyPencil("tokyonight")
-
-		-- github color setup
-		-- require("github-theme").setup({
-		-- })
-		-- vim.cmd("colorscheme github_dark_default")
 	end
 }

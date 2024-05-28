@@ -12,9 +12,6 @@ return {
 		-- Additional lua configuration
 		"folke/neodev.nvim",
 	},
-	opts = {
-		inlay_hints = { enabled = true }
-	},
 	config = function()
 		local on_attach = function(_, bufnr)
 			local nmap = function(keys, func, desc)
@@ -37,7 +34,7 @@ return {
 			nmap("<leader>ws", builtin.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
 
 			nmap("K", vim.lsp.buf.hover, "Hover Documentation")
-			-- nmap("<C-;>", vim.lsp.buf.signature_help, "Signature Documentation")
+			nmap("<C-s>", vim.lsp.buf.signature_help, "Hover Signature Documentation")
 
 			-- Lesser used LSP functionality
 			nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -70,6 +67,7 @@ return {
 
 		local servers = {
 			clangd = {
+				filetypes = { "c" }
 			},
 			gopls = {
 				filetypes = { "go", "gomod", "gowork", "gotmpl" },
@@ -133,7 +131,12 @@ return {
 				},
 			},
 		}
-		require("neodev").setup()
+		require("neodev").setup({
+			library = {
+				plugins = { "nvim-dap-ui" },
+				types = true,
+			}
+		})
 		-- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
 		capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)

@@ -47,5 +47,3 @@ vim.opt.swapfile = false
 vim.opt.backup = false
 
 vim.opt.scrolloff = 8
-
--- vim.opt.smartindent = true

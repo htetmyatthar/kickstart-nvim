@@ -13,6 +13,8 @@ vim.keymap.set("n", "<leader>Wh", vim.cmd.split, { desc = "split [W]indow [H]ori
 
 -- keymaps for better default experiences
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
+-- this will conflict with tmux super key
+vim.keymap.set({ "n", "v" }, "<C-Space>", "<Nop>", { silent = true })
 
 -- remap for dealing with word wrap
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -50,22 +52,6 @@ vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Escape Escape exits t
 -- change to vb for visual block mode since I'm using copy paste.
 vim.api.nvim_set_keymap("n", "vb", "<C-v>", { noremap = true })
 
--- inlay hints for globally; uncomment if you want inlay hints
--- vim.api.nvim_create_autocmd("LspAttach", {
--- 	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
--- 	callback = function(args)
--- 		local client = vim.lsp.get_client_by_id(args.data.client_id)
--- 		if client ~= nil then
--- 			if client.server_capabilities.inlayHintProvider then
--- 				vim.lsp.inlay_hint.enable(args.buf, true)
--- 				print(client.server_capabilities.inlayHintProvider)
--- 			end
--- 			-- whatever other lsp config you want
--- 		end
--- 		print("client is nil")
--- 	end
--- })
---
 -- if you don't use unnameplus in clip board use the following two
 --	   copy to sys clipboard the selected text
 -- vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
@@ -77,4 +63,3 @@ vim.keymap.set("n", "<C-k>", ":wincmd k<CR>")
 vim.keymap.set("n", "<C-j>", ":wincmd j<CR>")
 vim.keymap.set("n", "<C-h>", ":wincmd h<CR>")
 vim.keymap.set("n", "<C-l>", ":wincmd l<CR>")
-

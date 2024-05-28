@@ -36,28 +36,29 @@ return {
 		end, { desc = "Debug: Set Breakpoint" })
 		vim.keymap.set("n", "<F9>", dap.terminate, { desc = "Debug: Terminate debug session." })
 
-		-- TODO: patch my current fonts to get icons.
-
 		-- let the defaults to override the mappings and such other settings.
 		dapui.setup {
-			-- Set icons to characters that are more likely to work in every terminal.
-			--    Feel free to remove or use ones that you like more! :)
-			--    Don't feel like these are good choices.
 			icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
 			controls = {
 				enabled = true,
 				element = "repl",
-				icons = {
-					pause = '⏸',
-					play = '▶',
-					step_into = '⏎',
-					step_over = '⏭',
-					step_out = '⏮',
-					step_back = 'b',
-					run_last = '▶▶',
-					terminate = '⏹',
-					disconnect = '⏏',
-				},
+
+				-- uncomment if the font not includes the codeicons.
+				-- Set icons to characters that are more likely to work in every terminal.
+				--    Feel free to remove or use ones that you like more! :)
+				--    Don't feel like these are good choices.
+				-- 		icons = {
+				-- 			pause = '⏸',
+				-- 			play = '▶',
+				-- 			step_into = '⏎',
+				-- 			step_over = '⏭',
+				-- 			step_out = '⏮',
+				-- 			step_back = 'b',
+				-- 			run_last = '▶▶',
+				-- 			terminate = '⏹',
+				-- 			disconnect = '⏏',
+				-- 		},
+
 			},
 		}
 

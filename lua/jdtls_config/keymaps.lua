@@ -1,4 +1,4 @@
--- -- NOTE: Java specific keymaps with which key
+-- NOTE: Java specific keymaps with which key
 vim.cmd(
   "command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_compile JdtCompile lua require('jdtls').compile(<f-args>)"
 )
@@ -6,6 +6,7 @@ vim.cmd(
   "command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_set_runtime JdtSetRuntime lua require('jdtls').set_runtime(<f-args>)"
 )
 vim.cmd("command! -buffer JdtUpdateConfig lua require('jdtls').update_project_config()")
+vim.cmd("command! -buffer JdtUpdateDebugConfigs lua require('jdtls.dap').setup_dap_main_class_configs()")
 vim.cmd("command! -buffer JdtJol lua require('jdtls').jol()")
 vim.cmd("command! -buffer JdtBytecode lua require('jdtls').javap()")
 vim.cmd("command! -buffer JdtJshell lua require('jdtls').jshell()")
@@ -42,6 +43,7 @@ local mappings = {
     t = { "<Cmd>lua require'jdtls'.test_nearest_method()<CR>", "Test Method" },
     T = { "<Cmd>lua require'jdtls'.test_class()<CR>", "Test Class" },
     u = { "<Cmd>JdtUpdateConfig<CR>", "Update Config" },
+    d = { "<Cmd>JdtUpdateDebugConfigs<CR>", "Update Debugging Config" },
   },
 }
 

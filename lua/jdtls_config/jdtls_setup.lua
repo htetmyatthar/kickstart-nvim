@@ -123,6 +123,13 @@ function M.setup()
 					},
 					useBlocks = true,
 				},
+				-- to use with :JdtSetRuntime command.
+				-- configuration = {
+				-- 	runtimes = {
+				-- 		name = "",
+				-- 		path = ""
+				-- 	}
+				-- }
 			},
 		},
 		on_attach = on_attach,

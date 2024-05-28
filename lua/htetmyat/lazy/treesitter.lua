@@ -6,7 +6,7 @@ return {
 	build = ":TSUpdate",
 	config = function()
 		vim.defer_fn(function()
-			require("nvim-treesitter.configs").setup{
+			require("nvim-treesitter.configs").setup {
 				ensure_installed = {
 					"c", "cpp", "go", "lua", "python", "javascript", "typescript", "tsx", "rust", "bash",
 					"html", "css", "htmldjango", "java"
@@ -17,7 +17,7 @@ return {
 				ignore_install = {},
 
 				highlight = { enable = true },
-				indent = { enable = true},
+				indent = { enable = true },
 				incremental_selection = {
 					enable = true,
 					keymaps = {

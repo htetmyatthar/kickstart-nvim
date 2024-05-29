@@ -44,8 +44,10 @@ function M.setup()
 		nmap("<leader>D", builtin.lsp_type_definitions, "Type [D]efinition")
 		nmap("<leader>ds", builtin.lsp_document_symbols, "[D]ocument [S]ymbols")
 		nmap("<leader>ws", builtin.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+
 		nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-		nmap("<leader>hh", vim.lsp.buf.signature_help, "Signature [H][H]elp Documentation")
+		nmap("<C-s>", vim.lsp.buf.signature_help, "[S]ignature help Documentation Hover")
+
 		nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 		nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd Folder")
 		nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "[W]orkspace [R]emove Folder")

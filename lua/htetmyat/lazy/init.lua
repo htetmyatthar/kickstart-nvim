@@ -22,7 +22,8 @@ return {
 	},
 
 	{
-		-- Autocompletoin
+		-- Autocompletion
+		-- see cmp.lua file.
 		"hrsh7th/nvim-cmp",
 		dependencies = {
 			-- js-regexp library for luasnip

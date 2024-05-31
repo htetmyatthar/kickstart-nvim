@@ -72,6 +72,7 @@ function M.setup()
 			}
 		}
 	}
+	-- auto completion using cmp.
 	capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 	local config = {
@@ -97,6 +98,8 @@ function M.setup()
 				references = { includeDecompiledSources = true },
 				eclipse = { downloadSources = true },
 				maven = { downloadSources = true },
+				implementationsCodeLens = { enabled = true },
+				referencesCodeLens = { enabled = true },
 				signatureHelp = { enabled = true },
 				completion = {
 					favoriteStaticMembers = {

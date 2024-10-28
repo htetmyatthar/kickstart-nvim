@@ -72,7 +72,7 @@ return {
 			gopls = {
 				filetypes = { "go", "gomod", "gowork", "gotmpl" },
 				allExperiments = true,
-				templateExtensions = { "gohtmltmpl", "gohtml", "gotmpl", ".html.gotmpl", ".gotmpl.html" },
+				templateExtensions = { "html", "gohtmltmpl", "gohtml", "gotmpl", ".html.gotmpl", ".gotmpl.html" },
 				gofumpt = true,
 				analyses = {
 					unusedparams = true,
@@ -131,6 +131,16 @@ return {
 				},
 			},
 			jsonls = {},
+			templ = {},
+			htmx = {
+				filetypes = { "templ", "html" }
+			},
+			emmet_language_server = {
+				filetypes = { "css", "html", "templ" }
+			},
+			tailwindcss = {
+				filetypes = { "html" }
+			}
 		}
 		require("neodev").setup({
 			library = {
@@ -140,6 +150,7 @@ return {
 		})
 		-- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
+		capabilities.textDocument.completion.completionItem.snippetSupport = true
 		capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 		-- Ensure the servers above are installed
 		local mason_lspconfig = require 'mason-lspconfig'

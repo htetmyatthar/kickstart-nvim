@@ -9,14 +9,17 @@ return {
 			require("nvim-treesitter.configs").setup {
 				ensure_installed = {
 					"c", "cpp", "go", "lua", "python", "javascript", "typescript", "tsx", "rust", "bash",
-					"html", "css", "htmldjango", "java"
+					"html", "css", "htmldjango", "java", "templ"
 				},
 				modules = {},
 				auto_install = false,
 				sync_install = false,
 				ignore_install = {},
 
-				highlight = { enable = true },
+				highlight = {
+					enable = true,
+					additional_vim_regex_higihlighting = false,
+				},
 				indent = { enable = true },
 				incremental_selection = {
 					enable = true,

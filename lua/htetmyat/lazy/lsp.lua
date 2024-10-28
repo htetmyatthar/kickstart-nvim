@@ -130,6 +130,7 @@ return {
 					hint = { enable = true },
 				},
 			},
+			jsonls = {},
 		}
 		require("neodev").setup({
 			library = {

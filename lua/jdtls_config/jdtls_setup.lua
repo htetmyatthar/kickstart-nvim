@@ -17,7 +17,7 @@ function M.setup()
 	local path_to_jtest = path_to_mason_packages .. "/java-test"
 	local path_to_config = path_to_jdtls .. "/config_linux"
 	local lombok_path = path_to_jdtls .. "/lombok.jar"
-	local path_to_jar = path_to_jdtls .. "/plugins/org.eclipse.equinox.launcher_1.6.800.v20240330-1250.jar"
+	local path_to_jar = path_to_jdtls .. "/plugins/org.eclipse.equinox.launcher_1.6.900.v20240613-2009.jar"
 
 	local bundles = {
 		vim.fn.glob(path_to_jdebug .. "/extension/server/com.microsoft.java.debug.plugin-0.50.0.jar", true),

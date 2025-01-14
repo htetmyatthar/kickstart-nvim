@@ -10,3 +10,7 @@ Understand basics
 Understand deeply
 
 - [Teej's manual ASMR](https://www.youtube.com/watch?v=rT-fbLFOCy0&t=2608s&pp=ygULdGVlaiBuZW92aW0%3D)
+
+Teej's latest neovim teaching in 2024 Christmas
+
+- [Advent of neovim](https://youtu.be/TQn2hJeHQbM?si=YQ9w_GDQG8wWDDmJ)

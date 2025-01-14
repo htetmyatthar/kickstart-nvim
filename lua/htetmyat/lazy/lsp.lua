@@ -48,19 +48,39 @@ return {
 			vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
 				vim.lsp.buf.format()
 			end, { desc = 'Format current buffer with LSP' })
-		end
-		-- document existing key chains
-		require('which-key').register {
-			['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-			['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-			['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
-			['<leader>h'] = { name = 'More git', _ = 'which_key_ignore' },
-			['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-			['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-			['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
-			['<leader>W'] = { name = 'buffer [W]indow', _ = 'which_key_ignore' },
-		}
 
+
+			-- NOTE: this format command creating will shwo which language servers are used to format the file.
+			--
+			-- vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+			-- 	-- Get active clients for current buffer
+			-- 	local active_clients = vim.lsp.get_active_clients({ bufnr = vim.api.nvim_get_current_buf() })
+			-- 	-- Log before formatting
+			-- 	print("Active clients that support formatting:")
+			-- 	for _, client in ipairs(active_clients) do
+			-- 		if client.server_capabilities.documentFormattingProvider then
+			-- 			print(string.format("- %s", client.name))
+			-- 		end
+			-- 	end
+			--
+			-- 	-- Perform the formatting
+			-- 	vim.lsp.buf.format({
+			-- 		-- Optional: specify which client to use for formatting
+			-- 		-- filter = function(client)
+			-- 		--     return client.name == "templ"  -- or any other specific client
+			-- 		-- end,
+			-- 		async = true,
+			-- 		timeout_ms = 2000,
+			-- 		callback = function(err)
+			-- 			if err then
+			-- 				print("Formatting error:", vim.inspect(err))
+			-- 			else
+			-- 				print("Formatting complete")
+			-- 			end
+			-- 		end
+			-- 	})
+			-- end, { desc = 'Format current buffer with LSP' })
+		end
 		-- we are strict to make this order.
 		require("mason").setup()     -- setup mason
 		require("mason-lspconfig").setup() -- setup mason-lspconfi
@@ -97,7 +117,7 @@ return {
 			},
 			pyright = {},
 			rust_analyzer = {},
-			tsserver = {
+			ts_ls = {
 				-- taken from https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
 				javascript = {
 					inlayHints = {
@@ -132,6 +152,9 @@ return {
 			},
 			jsonls = {},
 			templ = {},
+			html = {
+				filetypes = { "html" } -- removed the templ so that .templ files will not be formatted with html lsp.
+			},
 			htmx = {
 				filetypes = { "templ", "html" }
 			},
@@ -139,7 +162,10 @@ return {
 				filetypes = { "css", "html", "templ" }
 			},
 			tailwindcss = {
-				filetypes = { "html" }
+				filetypes = { "template" }
+			},
+			sqlls = {
+				filetypes = { "sql" }
 			}
 		}
 		require("neodev").setup({

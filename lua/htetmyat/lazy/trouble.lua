@@ -18,10 +18,5 @@ return {
 				require("trouble").previous({ skip_groups = true, jump = true });
 			end)
 		end,
-
-		require("which-key").register {
-			["<leader>t"] = { name = "[T]oggle", _ = "which_key_ignore" },
-			["<leader>tt"] = { name = "[T]oggle [T]rouble", _ = "which_key_ignore" },
-		},
 	}
 }

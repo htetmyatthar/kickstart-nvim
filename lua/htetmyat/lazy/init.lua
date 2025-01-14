@@ -11,6 +11,10 @@ return {
 	-- useful plugin to show you pending keybinds.
 	"folke/which-key.nvim",
 
+	-- to work with which-key
+	{ "nvim-tree/nvim-web-devicons", opts = {} },
+	{ 'echasnovski/mini.nvim',       version = '*' },
+
 	-- "gc" to comment visual regions/lines
 	"numToStr/Comment.nvim",
 

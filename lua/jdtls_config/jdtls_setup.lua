@@ -20,7 +20,7 @@ function M.setup()
 	local path_to_jar = path_to_jdtls .. "/plugins/org.eclipse.equinox.launcher_1.6.900.v20240613-2009.jar"
 
 	local bundles = {
-		vim.fn.glob(path_to_jdebug .. "/extension/server/com.microsoft.java.debug.plugin-0.50.0.jar", true),
+		vim.fn.glob(path_to_jdebug .. "/extension/server/com.microsoft.java.debug.plugin-0.53.1.jar", true),
 	}
 
 	vim.list_extend(bundles, vim.split(vim.fn.glob(path_to_jtest .. "/extension/server/*.jar", true), "\n"))

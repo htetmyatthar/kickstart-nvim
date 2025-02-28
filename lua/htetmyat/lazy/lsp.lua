@@ -151,7 +151,9 @@ return {
 				},
 			},
 			jsonls = {},
-			templ = {},
+			templ = {
+				filetypes = { "templ" },
+			},
 			html = {
 				filetypes = { "html" } -- removed the templ so that .templ files will not be formatted with html lsp.
 			},

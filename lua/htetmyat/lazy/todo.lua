@@ -6,15 +6,16 @@ return {
 		-- can customize here.
 		keywords = {
 			-- custom todo flags.
-			IDEA = { icon = " ", color = "default" },
+			IDEA = { icon = " ", color = "info" },
+			LABEL = { icon = " ", color = "default" },
 			ALERT = { icon = " ", color = "warning" },
 			DONE = { icon = " ", color = "green" },
 			todo = { icon = " ", color = "hint" }, -- small todo for myself.
 
 			-- just to override the icon part of those flags.
 			FIX = {
-				icon = " ", -- icon used for the sign, and in search results
-				color = "error", -- can be a hex color, or a named color (see below)
+				icon = " ",                     -- icon used for the sign, and in search results
+				color = "error",                -- can be a hex color, or a named color (see below)
 				alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
 				-- signs = false, -- configure signs for some keywords individually
 			},

@@ -1,11 +1,13 @@
 local cmp = require('cmp')
-local Luasnip = require('luasnip')
+local luasnip = require('luasnip')
+
+-- Load VSCode-style snippets
 require('luasnip.loaders.from_vscode').lazy_load()
 
 cmp.setup({
 	snippet = {
 		expand = function(args)
-			Luasnip.lsp_expand(args.body)
+			luasnip.lsp_expand(args.body)
 		end,
 	},
 	mapping = cmp.mapping.preset.insert {
@@ -21,8 +23,8 @@ cmp.setup({
 		['<Tab>'] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item()
-			elseif Luasnip.expand_or_locally_jumpable() then
-				Luasnip.expand_or_jump()
+			elseif luasnip.expand_or_locally_jumpable() then
+				luasnip.expand_or_jump()
 			else
 				fallback()
 			end
@@ -30,8 +32,8 @@ cmp.setup({
 		['<S-Tab>'] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_prev_item()
-			elseif Luasnip.locally_jumpable(-1) then
-				Luasnip.jump(-1)
+			elseif luasnip.locally_jumpable(-1) then
+				luasnip.jump(-1)
 			else
 				fallback()
 			end
@@ -43,6 +45,17 @@ cmp.setup({
 	},
 })
 
+-- LuaSnip Configuration
+luasnip.config.setup({
+	enable_autosnippets = true,
+})
+
+-- Lazy.nvim Plugin Definition for LuaSnip
 return {
-	Luasnip.config.setup({}),
+	"L3MON4D3/LuaSnip",
+	build = "make install_jsregexp",
+	dependencies = { "rafamadriz/friendly-snippets" },
+	config = function()
+		require("luasnip.loaders.from_vscode").lazy_load()
+	end,
 }

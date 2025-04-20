@@ -11,6 +11,7 @@ return {
 				return vim.fn.executable 'make' == 1
 			end,
 		},
+		{ "nvim-tree/nvim-web-devicons", opts = {} },
 	},
 	config = function()
 		require("telescope").setup {
@@ -25,6 +26,9 @@ return {
 			extensions = {
 				fzf = {},
 			},
+			pickers = {
+				disable_devicons = true
+			}
 		}
 
 		pcall(require("telescope").load_extension, "fzf")

@@ -160,11 +160,11 @@ return {
 			htmx = {
 				filetypes = { "templ", "html" }
 			},
-			emmet_language_server = {
+			emmet_ls = {
 				filetypes = { "css", "html", "templ" }
 			},
 			tailwindcss = {
-				filetypes = { "template" }
+				filetypes = { "template", "templ" }
 			},
 			sqlls = {
 				filetypes = { "sql" }

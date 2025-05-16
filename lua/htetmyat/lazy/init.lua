@@ -3,15 +3,11 @@ return {
 	"tpope/vim-fugitive",
 	"tpope/vim-rhubarb",
 
-	-- detect tabstop and shiftwidth automatically
-	-- "tpope/vim-sleuth", -- I set those as defaults in set.lua if you want it uncomment
 
 	"nvim-lua/plenary.nvim",
 
-	-- useful plugin to show you pending keybinds.
 	"folke/which-key.nvim",
 
-	-- to work with which-key
 	{ "nvim-tree/nvim-web-devicons", opts = {} },
 	{ 'echasnovski/mini.nvim',       version = '*' },
 
@@ -44,7 +40,6 @@ return {
 		},
 	},
 
-	-- lightweight rose-pine colorscheme
 	{
 		"rose-pine/neovim",
 		name = "rose-pine",
